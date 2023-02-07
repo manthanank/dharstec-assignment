@@ -20,31 +20,32 @@ export class HomeComponent implements OnInit {
   gender: any;
 
   genders: Gender[] = [
-    {value: 'male', viewValue: 'Male'},
-    {value: 'female', viewValue: 'Female'},
+    { value: 'male', viewValue: 'All' },
+    { value: 'male', viewValue: 'Male' },
+    { value: 'female', viewValue: 'Female' },
   ];
-  constructor(private dataService: DataService, private router: Router){}
 
-  ngOnInit(){
-    this.dataService.getData().subscribe(data =>{
+  myObjArray = [
+    {id: 1, name: "Hardik" },
+    {id: 2, name: "Vimal" },
+    {id: 3, name: "Paresh" }
+  ];
+  constructor(private dataService: DataService, private router: Router) { }
+
+  ngOnInit() {
+    this.dataService.getData().subscribe(data => {
       console.log(data);
       this.data = data;
     })
   }
 
-  getData(){
-    return this.data
-  }
-
-  pageRefresh(){
-    // console.log("Refreshed page");
+  pageRefresh() {
     // window.location.reload();
-    // this.newdata = [];
-    // this.dataService.getData().subscribe(data =>{
-    //   console.log(data);
-    //   this.newdata.push(this.data);
-    //   console.log(this.newdata);
-    // })
-    console.log(this.data)
+    this.dataService.getData().subscribe(data => {
+      // this.refreshedData = data;
+      this.data = data;
+      // this.newdata = this.data + data
+      // console.log(this.newdata);
+    })
   }
 }
